@@ -1,20 +1,20 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
+  static PageController pageController = PageController();
 
   List<Onboard> onboards = [];
 
   OnboardingBloc() : super(OnboardingInitial()) {
-    on<OnboardingEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<ChangeOnboard>(onOnboardingChange);
   }
 
-  void onOnboardingChange(){}
+  void onOnboardingChange(OnboardingEvent event, Emitter<OnboardingState> state){}
 
   
 }
