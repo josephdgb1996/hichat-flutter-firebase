@@ -1,6 +1,14 @@
 part of 'onboarding_bloc.dart';
 
-@immutable
-sealed class OnboardingState {}
+class OnboardingState {
+  final int position;
+  OnboardingState(this.position);
+}
 
-final class OnboardingInitial extends OnboardingState {}
+class Onboard {
+  final Widget header;
+  final String title;
+  final String subtitle;
+
+  Onboard({required this.header, required this.title, required this.subtitle});
+}

@@ -1,65 +1,71 @@
-import 'package:app/src/@core/widgets/rounded_button.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dots_indicator/dots_indicator.dart';
+
+import 'package:app/src/@core/widgets/rounded_button.dart';
+import 'package:app/src/module/onboard/bloc/onboarding_bloc.dart';
 
 class OnboardScreen extends StatelessWidget {
   const OnboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Widget body = const Column(children: [
-      _OnboardImage(),
-      SizedBox(
+    const EdgeInsets edgeInsets = EdgeInsets.symmetric(horizontal: 10.0);
+
+    Widget body = Column(children: [
+      const _OnboardHead(),
+      Container(
         height: 200,
-        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          _OnboardText(),
-          _OnboardDots(),
-        ]),
+        padding: edgeInsets,
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [_OnboardText(), _OnboardDots()],
+        ),
       ),
     ]);
 
-    Widget bottomNavigation = const SizedBox(
+    Widget bottomNavigation = Container(
       height: 150,
-      child: Center(child: RoundedButton(text: "Get Started")),
+      padding: edgeInsets,
+      child: const Center(child: RoundedButton(text: "Get Started")),
     );
 
     return Scaffold(
-      body: GestureDetector(onPanUpdate: _onPanUpdate, child: body),
+      body: GestureDetector(onPanUpdate: (details) => _onPanUpdate(context, details), child: body),
       bottomNavigationBar: bottomNavigation,
     );
   }
 
-  void _onPanUpdate(DragUpdateDetails details) {
+  void _onPanUpdate(BuildContext context, DragUpdateDetails details) async {
     // Swiping in right direction.
     if (details.delta.dx > 0) {
-      print("right");
+      context.read<OnboardingBloc>().add(BackOnboard());
     }
 
     // Swiping in left direction.
     if (details.delta.dx < 0) {
-      print("left");
+      context.read<OnboardingBloc>().add(NextOnboard());
     }
   }
 }
 
-class _OnboardImage extends StatelessWidget {
-  const _OnboardImage();
+class _OnboardHead extends StatelessWidget {
+  const _OnboardHead();
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.red,
-        child: PageView(
-          // controller:,
-          children: const [
-          Text("1"),
-          Text("2"),
-          Text("3"),
-          Text("4"),
-        ]),
-      ),
-    );
+    return BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
+      return Expanded(
+        child: Container(
+          color: Colors.red,
+          child: PageView(
+            controller: OnboardingBloc.pageController,
+            children: OnboardingBloc.onboards.map((Onboard onboard) => onboard.header).toList(),
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -68,9 +74,13 @@ class _OnboardText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(direction: Axis.vertical, children: [
-      Text("Welcome to Hichat!", style: TextStyle(fontSize: 30)),
-      Text("The best messenger and chat app of the century to make your day great"),
+    ThemeData theme = Theme.of(context);
+    TextStyle titleTextStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: theme.primaryColor);
+    TextStyle subtitleTextStyle = const TextStyle();
+
+    return Column(children: [
+      Text("Welcome to Hichat!", style: titleTextStyle),
+      Text("The best messenger and chat app of the century to make your day great", style: subtitleTextStyle),
     ]);
   }
 }
@@ -80,10 +90,12 @@ class _OnboardDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DotsIndicator(
-      dotsCount: 3,
-      position: 2,
-      decorator: const DotsDecorator(activeShape: RoundedRectangleBorder()),
-    );
+    return BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
+      return DotsIndicator(
+        dotsCount: OnboardingBloc.onboards.length,
+        position: state.position,
+        decorator: const DotsDecorator(activeShape: RoundedRectangleBorder()),
+      );
+    });
   }
 }
