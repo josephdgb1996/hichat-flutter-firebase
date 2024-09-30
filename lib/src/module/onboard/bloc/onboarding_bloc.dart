@@ -10,7 +10,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   List<Onboard> onboards = [];
 
-  OnboardingBloc() : super(OnboardingInitial()) {
+  OnboardingBloc() : super(OnboardingCompleted()) {
     on<ChangeOnboard>(onOnboardingChange);
   }
 
