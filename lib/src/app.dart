@@ -1,5 +1,4 @@
 import 'package:app/src/module/auth/screens/auth_screen.dart';
-import 'package:app/src/module/onboard/ui/screens/onboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/src/module/onboard/bloc/onboarding_bloc.dart';
