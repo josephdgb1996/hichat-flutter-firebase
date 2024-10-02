@@ -1,5 +1,5 @@
-import 'package:app/src/@core/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:app/src/@core/statics/theme/colors.dart';
 
 abstract class AppTheme {
   static ColorScheme lightColorScheme = ColorScheme.light(
