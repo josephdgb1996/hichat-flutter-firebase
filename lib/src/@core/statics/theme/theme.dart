@@ -11,4 +11,8 @@ abstract class AppTheme {
     primary: AppColors.primary,
     secondary: AppColors.secondary,
   );
+
+  static ThemeData lighTheme = ThemeData.from(
+    colorScheme: lightColorScheme,
+  );
 }

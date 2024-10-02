@@ -1,4 +1,6 @@
+import 'package:app/src/@core/statics/theme/theme.dart';
 import 'package:app/src/module/auth/screens/auth_screen.dart';
+import 'package:app/src/module/auth/screens/fill_profile_screen.dart';
 import 'package:app/src/module/auth/screens/signin_with_email.dart';
 import 'package:app/src/module/auth/screens/signup_with_email.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,11 @@ class HiChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hi Chat',
+      theme: AppTheme.lighTheme,
       home: SafeArea(
         child: BlocProvider(
           create: (context) => OnboardingBloc(),
-          child: const SignUpWithEmail(),
+          child: const FillProfileScreen(),
         ),
       ),
     );

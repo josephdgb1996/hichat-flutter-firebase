@@ -14,7 +14,7 @@ class RoundedButton extends StatelessWidget {
     ColorScheme colorScheme = theme.colorScheme;
     TextTheme textTheme = theme.textTheme;
 
-    Color color = backgroundColor ?? const Color.fromARGB(255, 1, 124, 225);
+    Color color = backgroundColor ?? colorScheme.primary;
 
     ButtonStyle buttonStyle = ElevatedButton.styleFrom(
       shadowColor: color,

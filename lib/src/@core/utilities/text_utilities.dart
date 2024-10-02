@@ -5,7 +5,6 @@ abstract class TextUtilities {
       String substringLetters = value.substring(1).toLowerCase();
       return "$firstLetterUppercase$substringLetters";
     }
-
     return value;
   }
 

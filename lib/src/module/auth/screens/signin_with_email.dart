@@ -1,3 +1,4 @@
+import 'package:app/src/@core/widgets/custom_text_field.dart';
 import 'package:app/src/@core/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
@@ -15,18 +16,8 @@ class SignInWithEmail extends StatelessWidget {
           children: [
             Placeholder(),
             Text("Login to Your Account"),
-            TextField(
-              decoration: InputDecoration(
-                fillColor: Colors.red,
-                border: OutlineInputBorder()
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                fillColor: Colors.red,
-                border: OutlineInputBorder()
-              ),
-            ),
+            CustomTextField(),
+            CustomTextField(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Checkbox(value: false, onChanged: null), Text("Remember me")],
