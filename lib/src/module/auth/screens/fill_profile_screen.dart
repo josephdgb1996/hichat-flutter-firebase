@@ -19,9 +19,9 @@ class FillProfileScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _AvatarPicker(),
-            CustomTextField(hintText: "Nombre"),
-            CustomTextField(hintText: "Username",),
+            _ProfilePicker(),
+            CustomTextField(hintText: "Name"),
+            CustomTextField(hintText: "Surname",),
             CustomTextField(hintText: "Date", suffixIcon: Icon(Icons.calendar_month, color: Colors.grey)),
             CustomTextField(hintText: "Email", suffixIcon: Icon(Icons.email, color: Colors.grey),),
             CustomTextField(hintText: "About",),
@@ -33,8 +33,8 @@ class FillProfileScreen extends StatelessWidget {
   }
 }
 
-class _AvatarPicker extends StatelessWidget {
-  const _AvatarPicker();
+class _ProfilePicker extends StatelessWidget {
+  const _ProfilePicker();
 
   @override
   Widget build(BuildContext context) {
